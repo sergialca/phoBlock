@@ -1,0 +1,61 @@
+.horizontal {
+    width: 80%;
+    height: 200px;
+    margin: 30px 10px 10px 10px;
+
+    .img-back {
+        background-size: cover;
+        background-position-y: 10%;
+        width: 100%;
+        height: 100%;
+    }
+    .img-back:hover {
+        opacity: 0.8;
+    }
+}
+
+.portrait {
+    width: 80%;
+    height: 500px;
+    margin: 10px;
+
+    .img-back {
+        background-size: cover;
+        background-position-y: bottom;
+        width: 100%;
+        height: 100%;
+    }
+    .img-back:hover {
+        opacity: 0.8;
+    }
+}
+
+.btn-wrapper {
+    width: 100%;
+    height: 30px;
+    background-color: green;
+
+    .btn-download {
+        width: 100%;
+        height: 100%;
+        background-color: #a6f6f1;
+        outline: none;
+        border-width: 0px;
+        border-style: none;
+        cursor: pointer;
+    }
+    .btn-download:hover {
+        background-color: #e4fcfa;
+    }
+}
+
+@media (min-width: 768px) {
+    .horizontal {
+        width: 40%;
+        height: 200px;
+    }
+    .portrait {
+        width: 20%;
+        height: 400px;
+    }
+}

@@ -1,8 +1,11 @@
 .navbar {
     width: 100%;
-    background-color: #ccc;
+    background-color: #fff;
     color: #252525;
     padding: 10px 0;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 
     .ali {
         padding: 10px;

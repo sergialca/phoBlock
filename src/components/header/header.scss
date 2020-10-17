@@ -1,0 +1,29 @@
+.header {
+    width: 100%;
+    background-image: url("../../img/header.png");
+    height: 300px;
+    background-position: 20% bottom;
+
+    .text-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 10px 0 10px;
+
+        .title {
+            font-size: 64px;
+            margin: 0%;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .sub-title {
+            color: #fff;
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+        }
+    }
+}
