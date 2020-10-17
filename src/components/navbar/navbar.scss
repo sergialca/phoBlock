@@ -1,0 +1,61 @@
+.navbar {
+    width: 100%;
+    background-color: #ccc;
+    color: #252525;
+    padding: 30px;
+
+    .ali {
+        padding: 10px;
+        text-decoration: none;
+        color: #000;
+    }
+
+    .activator {
+        font-size: 30px;
+        margin: 10px 30px 0 0;
+        color: #000;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        float: right;
+    }
+
+    .logo {
+        padding: 10px;
+        text-decoration: none;
+        color: #000;
+    }
+
+    .links {
+        height: 0;
+        overflow: hidden;
+        list-style-type: none;
+        font-weight: bold;
+        vertical-align: top;
+    }
+
+    .show-nav {
+        height: 120px;
+    }
+
+    /* Media screen size */
+    @media screen and (min-width: 768px) {
+        .activator {
+            display: none;
+        }
+
+        .links {
+            height: auto;
+            display: inline-flex;
+            margin: 0;
+        }
+
+        .ali {
+            padding: 0px;
+            &.first {
+                margin-right: 20px;
+            }
+        }
+    }
+}
