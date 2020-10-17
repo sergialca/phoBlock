@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/phoBlock/static/css/main.fd80e6f9.chunk.css",
+    "main.js": "/phoBlock/static/js/main.98a25a4e.chunk.js",
+    "main.js.map": "/phoBlock/static/js/main.98a25a4e.chunk.js.map",
+    "runtime-main.js": "/phoBlock/static/js/runtime-main.c8d668a1.js",
+    "runtime-main.js.map": "/phoBlock/static/js/runtime-main.c8d668a1.js.map",
+    "static/js/2.80104d79.chunk.js": "/phoBlock/static/js/2.80104d79.chunk.js",
+    "static/js/2.80104d79.chunk.js.map": "/phoBlock/static/js/2.80104d79.chunk.js.map",
+    "index.html": "/phoBlock/index.html",
+    "precache-manifest.711aa07f7f1c322b6c7fc05efb0061a9.js": "/phoBlock/precache-manifest.711aa07f7f1c322b6c7fc05efb0061a9.js",
+    "service-worker.js": "/phoBlock/service-worker.js",
+    "static/css/main.fd80e6f9.chunk.css.map": "/phoBlock/static/css/main.fd80e6f9.chunk.css.map",
+    "static/js/2.80104d79.chunk.js.LICENSE.txt": "/phoBlock/static/js/2.80104d79.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c8d668a1.js",
+    "static/js/2.80104d79.chunk.js",
+    "static/css/main.fd80e6f9.chunk.css",
+    "static/js/main.98a25a4e.chunk.js"
+  ]
+}
