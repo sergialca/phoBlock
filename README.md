@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Watch the challenge result [here](https://sergialca.github.io/phoBlock/)
+Watch the result [here](https://sergialca.github.io/phoBlock/)
 
 ## Getting started
 

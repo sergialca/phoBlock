@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { TiThMenu } from "react-icons/ti";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/user";
+import logo from "../../img/pho_logo.png";
 import "./navbar.scss";
 
 const Navbar = () => {
@@ -10,16 +12,38 @@ const Navbar = () => {
         setToggle(() => !toggle);
     };
 
+    const { user } = useContext(UserContext);
+
     return (
         <div className="navbar">
             <button className="activator" onClick={() => onToggle()}>
                 <TiThMenu />
             </button>
-            <Link className="logo" to="/home">PhoBlock</Link>
-            <ul className={toggle ? "links show-nav" : "links"}>
-                <Link className="ali first" to="/login">Log in</Link>
-                <Link className="ali" to="/about">About</Link>
-            </ul>
+            <Link to="/home">
+                <img className="logo" src={logo} alt="pho block logo" />
+            </Link>
+            {user.logged ? (
+                <ul className={toggle ? "links show-nav" : "links"}>
+                    <Link className="ali" to="/about">
+                        About
+                    </Link>
+                    <Link className="ali dist" to="/profile">
+                        Profile
+                    </Link>
+                </ul>
+            ) : (
+                <ul className={toggle ? "links show-nav" : "links"}>
+                    <Link className="ali dist" to="/about">
+                        About
+                    </Link>
+                    <Link className="ali dist" to="/login">
+                        Log in
+                    </Link>
+                    <Link className="ali" to="/signup">
+                        Sign Up
+                    </Link>
+                </ul>
+            )}
         </div>
     );
 };
