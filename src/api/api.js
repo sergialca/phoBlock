@@ -14,7 +14,7 @@ export const sendSignupData = async () => {
         });
         return send;
     } catch (error) {
-        console.log("Error sending data to server");
+        console.log("Error sending data to server when signed up");
         return false;
     }
 };
