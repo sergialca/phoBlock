@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import Input from "../../components/input/input";
+import SubmitButton from "../submitButton/submitButton";
+import { sendSignupData } from "../../api/api";
 import "./signupForm.scss";
 
 const SignupForm = () => {
+    const [loading, setLoading] = useState(false);
     const [field, setField] = useState({ name: "", surname: "", wallet: "", mail: "", psw: "" });
 
     const onChange = (e) => {
@@ -10,6 +13,15 @@ const SignupForm = () => {
             ...field,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const onSign = async () => {
+        setLoading(() => true);
+        const res = await sendSignupData(field);
+        if (res) {
+            //congrats tou signed up
+        }
+        setLoading(() => false);
     };
 
     return (
@@ -64,6 +76,16 @@ const SignupForm = () => {
                     placeholder="Repeat Password"
                     type="password"
                     onChange={onChange}
+                />
+            </div>
+            <div className="sign-btn-wrapper">
+                <SubmitButton
+                    txt="Sign up"
+                    width="200px"
+                    bcolor="#42B8A8"
+                    color="#fff"
+                    loading={loading}
+                    call={onSign}
                 />
             </div>
         </div>
