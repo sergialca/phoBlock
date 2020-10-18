@@ -25,45 +25,47 @@ const SignupForm = () => {
                 />
                 <Input
                     classe="deskinput"
-                    name="name"
+                    name="surname"
                     label="Surname"
-                    placeholder="Name"
+                    placeholder="Surname"
                     type="text"
                     onChange={onChange}
                 />
             </div>
-            <Input
-                classe="input"
-                name="wallet"
-                label="Wallet"
-                placeholder="Ethereum Wallet"
-                type="text"
-                onChange={onChange}
-            />
-            <Input
-                classe="input"
-                name="mail"
-                label="Email"
-                placeholder="Email"
-                type="email"
-                onChange={onChange}
-            />
-            <Input
-                classe="input"
-                name="psw"
-                label="Password"
-                placeholder="Password"
-                type="password"
-                onChange={onChange}
-            />
-            <Input
-                classe="input"
-                name="repsw"
-                label="Repeat Password"
-                placeholder="Repeat Password"
-                type="password"
-                onChange={onChange}
-            />
+            <div className="rest">
+                <Input
+                    classe="input"
+                    name="wallet"
+                    label="Wallet"
+                    placeholder="Ethereum Wallet"
+                    type="text"
+                    onChange={onChange}
+                />
+                <Input
+                    classe="input"
+                    name="mail"
+                    label="Email"
+                    placeholder="Email"
+                    type="email"
+                    onChange={onChange}
+                />
+                <Input
+                    classe="input"
+                    name="psw"
+                    label="Password"
+                    placeholder="Password"
+                    type="password"
+                    onChange={onChange}
+                />
+                <Input
+                    classe="input"
+                    name="repsw"
+                    label="Repeat Password"
+                    placeholder="Repeat Password"
+                    type="password"
+                    onChange={onChange}
+                />
+            </div>
         </div>
     );
 };

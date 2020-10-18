@@ -1,9 +1,24 @@
 .signup-form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 40px 0;
+
     .first-row {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        width: 100%;
+    }
+
+    .rest {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
     }
 }
 
