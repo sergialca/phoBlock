@@ -18,3 +18,21 @@ export const sendSignupData = async () => {
         return false;
     }
 };
+
+export const sendLoginData = async (mail, psw) => {
+    try {
+        const send = await axios({
+            method: "post",
+            url: `${url}`,
+            headers: { "Access-Control-Allow-Origin": "*" },
+            data: {
+                email: mail || "",
+                psw: psw || "",
+            },
+        });
+        return send;
+    } catch (error) {
+        console.log("Error sending data to server when loggin in");
+        return false;
+    }
+};

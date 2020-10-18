@@ -28,6 +28,16 @@
     .input:active {
         outline: none;
     }
+
+    .input-error {
+        margin: 0;
+        font-size: 0.8em;
+        color: red;
+    }
+    .input-error::after {
+        color: #fff;
+        content: "-";
+    }
 }
 
 @media (min-width: 768px) {
@@ -35,7 +45,7 @@
         width: auto;
         .input-label {
             font-size: 0.8em;
-            margin: 20px 0 0 0;
+            margin: 10px 0 0 0;
         }
         .input {
             width: 435px;

@@ -1,7 +1,7 @@
 import React from "react";
 import "./input.scss";
 
-const input = ({ name, type, value, onChange, placeholder, label, classe }) => {
+const input = ({ name, type, value, onChange, placeholder, label, classe, error }) => {
     return (
         <div className="input-wrapper">
             <label className="input-label">{label}</label>
@@ -13,6 +13,7 @@ const input = ({ name, type, value, onChange, placeholder, label, classe }) => {
                 onChange={onChange}
                 placeholder={placeholder}
             />
+            <p className="input-error">{error}</p>
         </div>
     );
 };
