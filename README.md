@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Watch the result [here](https://sergialca.github.io/phoBlock/)
+Watch the result [here](https://sergialca.github.io/phoblock/)
 
 ## Getting started
 
@@ -8,8 +8,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Requires
 
-- Git
-- Node
+-   Git
+-   Node
 
 ### Development environment
 
