@@ -36,6 +36,9 @@ const Navbar = () => {
                     <Link className="ali dist" to="/about">
                         About
                     </Link>
+                    <Link className="ali dist" to="/vote_and_proposal">
+                        Votes and Proposals
+                    </Link>
                     <Link className="ali dist" to="/login">
                         Log in
                     </Link>
