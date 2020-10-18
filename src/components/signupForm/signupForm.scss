@@ -1,0 +1,16 @@
+.signup-form {
+    .first-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 768px) {
+    .signup-form {
+        .first-row {
+            flex-direction: row;
+        }
+    }
+}

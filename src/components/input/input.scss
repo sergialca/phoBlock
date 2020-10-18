@@ -1,0 +1,44 @@
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .input-label {
+        font-size: 0.8em;
+        margin-top: 6px;
+    }
+    .input,
+    .deskinput {
+        -webkit-appearance: none !important;
+        background: #fff;
+        padding: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        height: 30px;
+        outline: none;
+        width: 400px;
+        font-size: 14px;
+    }
+
+    .input:focus {
+        border-color: #49beae;
+    }
+
+    .input:active {
+        outline: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .input-wrapper {
+        .input {
+            width: 420px;
+        }
+        .deskinput {
+            width: 200px;
+            &.first {
+                margin-right: 20px;
+            }
+        }
+    }
+}
