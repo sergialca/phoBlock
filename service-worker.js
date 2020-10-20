@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/phoblock/precache-manifest.611677d01c25a7990a633fc7be2dfb71.js"
+  "/phoblock/precache-manifest.38c6dd0d26d9465803c80a40e9ca3b67.js"
 );
 
 self.addEventListener('message', (event) => {
