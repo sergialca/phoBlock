@@ -17,7 +17,19 @@ const SignupForm = () => {
 
     const onSign = async () => {
         setLoading(() => true);
-        const res = await sendSignupData(field);
+
+        var sendSignupData = {
+            "firstName": field.name,
+            "surname": field.surname,
+            "wallet": field.wallet,
+            "emailAddress": field.mail,
+            "userPassword": field.psw,
+            "username": "need to create",
+            "dateCreated": "2020-10-20"
+        }
+
+        const res = await sendSignupData(sendSignupData);
+        console.log(res);
         if (res) {
             //congrats tou signed up
         }
