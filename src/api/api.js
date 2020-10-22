@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "azure.server";
+const url = "http://localhost:3001";
 
 export const sendSignupData = async () => {
     try {
         const send = await axios({
-            url: `${url}`,
+            url: `${url}/signup`,
             headers: {
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Headers":
@@ -23,8 +23,7 @@ export const sendLoginData = async (mail, psw) => {
     try {
         const send = await axios({
             method: "post",
-            url: `${url}`,
-            headers: { "Access-Control-Allow-Origin": "*" },
+            url: `${url}/login`,
             data: {
                 email: mail || "",
                 psw: psw || "",
