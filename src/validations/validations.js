@@ -8,11 +8,21 @@ export const mailValidation = (mail) => {
         return "invalid";
     } else if (!mail) {
         return "required";
-    } else return true;
+    } else return "valid";
 };
 
 export const textValidation = (field) => {
     if (!field) {
         return false;
     } else return true;
+};
+
+export const repswValidation = (psw, repsw) => {
+    if (!repsw) {
+        return "required";
+    } else if (psw !== repsw) {
+        return "nomatch";
+    } else {
+        return "valid";
+    }
 };

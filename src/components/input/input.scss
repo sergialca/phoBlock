@@ -30,7 +30,7 @@
     }
 
     .input-error {
-        margin: 0;
+        margin: 0 0 0 42px;
         font-size: 0.8em;
         color: red;
     }
@@ -55,6 +55,9 @@
             &.first {
                 margin-right: 20px;
             }
+        }
+        .input-error {
+            margin: 0;
         }
     }
 }

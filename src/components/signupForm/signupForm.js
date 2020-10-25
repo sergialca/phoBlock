@@ -6,7 +6,22 @@ import "./signupForm.scss";
 
 const SignupForm = () => {
     const [loading, setLoading] = useState(false);
-    const [field, setField] = useState({ name: "", surname: "", wallet: "", mail: "", psw: "" });
+    const [field, setField] = useState({
+        name: "",
+        surname: "",
+        wallet: "",
+        mail: "",
+        psw: "",
+        repsw: "",
+    });
+    const [error, setError] = useState({
+        name: "",
+        surname: "",
+        wallet: "",
+        mail: "",
+        psw: "",
+        repsw: "",
+    });
 
     const onChange = (e) => {
         setField({
@@ -16,6 +31,7 @@ const SignupForm = () => {
     };
 
     const onSign = async () => {
+        //name validation
         setLoading(() => true);
 
         var today = new Date();
@@ -52,6 +68,7 @@ const SignupForm = () => {
                     placeholder="Name"
                     type="text"
                     onChange={onChange}
+                    error={error.name}
                 />
                 <Input
                     classe="deskinput"
@@ -60,6 +77,7 @@ const SignupForm = () => {
                     placeholder="Surname"
                     type="text"
                     onChange={onChange}
+                    error={error.surname}
                 />
             </div>
             <div className="rest">
@@ -70,6 +88,7 @@ const SignupForm = () => {
                     placeholder="Ethereum Wallet"
                     type="text"
                     onChange={onChange}
+                    error={error.wallet}
                 />
                 <Input
                     classe="input"
@@ -78,6 +97,7 @@ const SignupForm = () => {
                     placeholder="Email"
                     type="email"
                     onChange={onChange}
+                    error={error.mail}
                 />
                 <Input
                     classe="input"
@@ -86,6 +106,7 @@ const SignupForm = () => {
                     placeholder="Password"
                     type="password"
                     onChange={onChange}
+                    error={error.psw}
                 />
                 <Input
                     classe="input"
@@ -94,6 +115,7 @@ const SignupForm = () => {
                     placeholder="Repeat Password"
                     type="password"
                     onChange={onChange}
+                    error={error.repsw}
                 />
             </div>
             <div className="sign-btn-wrapper">
