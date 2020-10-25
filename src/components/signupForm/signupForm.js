@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../components/input/input";
 import SubmitButton from "../submitButton/submitButton";
-import { sendSignupData } from "../../api/api";
+import api from "../../api/api";
 import "./signupForm.scss";
 
 const SignupForm = () => {
@@ -18,17 +18,23 @@ const SignupForm = () => {
     const onSign = async () => {
         setLoading(() => true);
 
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+
         var sendSignupData = {
             "firstName": field.name,
             "surname": field.surname,
             "wallet": field.wallet,
             "emailAddress": field.mail,
             "userPassword": field.psw,
-            "username": "need to create",
-            "dateCreated": "2020-10-20"
+            "dateCreated": today
         }
 
-        const res = await sendSignupData(sendSignupData);
+        const res = await api.sendSignupData(sendSignupData);
         console.log(res);
         if (res) {
             //congrats tou signed up

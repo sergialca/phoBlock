@@ -2,64 +2,78 @@ import axios from "axios";
 
 //const url = "azure.server";
 
-export const sendSignupData = async (dataToSubmit) => {
-    var url = "http://coms-309-vb-05.cs.iastate.edu:7070/User";
+async function sendSignupData(dataToSubmit) {
+    var retVal = false;
 
-    await axios.post(url, dataToSubmit)
+    await axios.post("/User", dataToSubmit)
     .then(response => {
-        return true;
+        console.log(response);
+        retVal = true;
     })
     .catch(error => {
         console.log(error);
-        return false;
+        retVal = false;
     })
 
-    // try {
-    //     const send = await axios({
-    //         url: `${url}`,
-    //         headers: {
-    //             "Access-Control-Allow-Origin": "*",
-    //             "Access-Control-Allow-Headers":
-    //                 "x-requested-with, authorization, content-type, cache-control, pragma, expires,  Content-Language",
-    //         },
-    //     });
-    //     return send;
-    // } catch (error) {
-    //     console.log("Error sending data to server when signed up");
-    //     return false;
-    // }
-};
+    return retVal;
+}
 
-export const sendLoginData = async (mail, psw) => {
-    var url = "http://coms-309-vb-05.cs.iastate.edu:7070/AuthenticateLogin";
-
+async function sendLoginData(mail, psw) {
     var dataToSubmit = {
         "emailAddress": mail,
         "password": psw
     }
 
-    await axios.post(url, dataToSubmit)
+    var responseData = {};
+
+    await axios.post("/AuthenticateLogin", dataToSubmit)
     .then(response => {
-        return true;
+        //console.log(response.data);
+
+        responseData = response.data;
     })
     .catch(error => {
         console.log(error);
-        return false;
     })
 
-    // try {
-    //     const send = await axios({
-    //         method: "post",
-    //         url: `${url}`,
-    //         headers: { "Access-Control-Allow-Origin": "*" },
-    //         data: {
-    //             email: mail || "",
-    //             psw: psw || "",
-    //         },
-    //     });
-    //     return send;
-    // } catch (error) {
-    //     console.log("Error sending data to server when loggin in");
-    //     return false;
-    // }
-};
+    return responseData;
+}
+
+// export const sendLoginData = async (mail, psw) => {
+//     var url = "http://coms-309-vb-05.cs.iastate.edu:7070/AuthenticateLogin";
+
+//     var dataToSubmit = {
+//         "emailAddress": mail,
+//         "password": psw
+//     }
+
+//     await axios.post(url, dataToSubmit)
+//     .then(response => {
+//         return true;
+//     })
+//     .catch(error => {
+//         console.log(error);
+//         return false;
+//     })
+
+//     // try {
+//     //     const send = await axios({
+//     //         method: "post",
+//     //         url: `${url}`,
+//     //         headers: { "Access-Control-Allow-Origin": "*" },
+//     //         data: {
+//     //             email: mail || "",
+//     //             psw: psw || "",
+//     //         },
+//     //     });
+//     //     return send;
+//     // } catch (error) {
+//     //     console.log("Error sending data to server when loggin in");
+//     //     return false;
+//     // }
+// };
+
+export default{
+    sendSignupData,
+    sendLoginData
+}

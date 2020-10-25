@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar/navbar";
 import Input from "../../components/input/input";
 import SubmitButton from "../../components/submitButton/submitButton";
 import { mailValidation, textValidation } from "../../validations/validations";
-import { sendLoginData } from "../../api/api";
+import api from "../../api/api";
 import "./login.scss";
 
 const Login = () => {
@@ -31,7 +31,7 @@ const Login = () => {
             ? setError((error) => ({ ...error, psw: "" }))
             : setError((error) => ({ ...error, psw: "Password is required" }));
         if (mailIsValid && pswIsValid) {
-            const res = await sendLoginData(log.mail, log.psw);
+            const res = await api.sendLoginData(log.mail, log.psw);
             if (res) {
                 //go to homepage
             }
