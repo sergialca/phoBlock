@@ -30,7 +30,7 @@ const Login = () => {
         pswIsValid
             ? setError((error) => ({ ...error, psw: "" }))
             : setError((error) => ({ ...error, psw: "Password is required" }));
-        if (mailIsValid && pswIsValid) {
+        if (mailIsValid === "valid" && pswIsValid) {
             const res = await api.sendLoginData(log.mail, log.psw);
             if (res) {
                 //go to homepage
