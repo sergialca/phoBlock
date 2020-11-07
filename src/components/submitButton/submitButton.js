@@ -1,5 +1,6 @@
 import React from "react";
 import ClipLoader from "react-spinners/ClipLoader";
+import PropTypes from "prop-types";
 import "./submitButton.scss";
 
 const SubmitButton = ({ txt, loading, width, color, bcolor, call }) => {
@@ -16,6 +17,15 @@ const SubmitButton = ({ txt, loading, width, color, bcolor, call }) => {
             </span>
         </button>
     );
+};
+
+SubmitButton.propTypes = {
+    txt: PropTypes.string,
+    loading: PropTypes.bool,
+    width: PropTypes.string,
+    color: PropTypes.string,
+    bcolor: PropTypes.string,
+    call: PropTypes.func,
 };
 
 export default SubmitButton;

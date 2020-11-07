@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
@@ -6,44 +6,44 @@ import Profile from "./pages/profile/profile";
 import Home from "./pages/home/home";
 import About from "./pages/about/about";
 import { UserContext } from "./context/user";
-import './App.scss';
+import Parse from "parse";
+import "./App.scss";
 
 function App() {
-
-  const getUserLoged = () => {
-    const session = localStorage.getItem(`phouser`)
+    const getUserLoged = () => {
+        const storage = localStorage.getItem(`phouser`);
+        const session = JSON.parse(storage);
         if (session) {
-        return session.token
-            ? {
-                  logged: true,
-                  name: session.name,
-                  mail: session.email,
-                  token: session.sessionToken,
-              }
-            : { logged: false };
-    } else return { logged: false };
-};
+            return session.token
+                ? {
+                      logged: true,
+                      name: session.name,
+                      mail: session.email,
+                      token: session.sessionToken,
+                  }
+                : { logged: false };
+        } else return { logged: false };
+    };
 
-const [user, setUser] = useState(getUserLoged());
+    const [user, setUser] = useState(getUserLoged());
 
+    const { REACT_APP_ID, REACT_APP_KEY } = process.env;
 
-  return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route
-              path="/"
-              exact
-              component={Home}
-              
-          />
-          <Route path="/about" component={About} />
-          <Route path="/login" component={Profile} />
-          <Redirect to="/" />
-      </Switch>
-    </UserContext.Provider>
-  );
+    Parse.serverURL = "https://parseapi.back4app.com";
+    Parse.initialize(REACT_APP_ID, REACT_APP_KEY);
+
+    return (
+        <UserContext.Provider value={{ user, setUser }}>
+            <Switch>
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
+                <Route path="/" exact component={Home} />
+                <Route path="/about" component={About} />
+                <Route path="/profile" component={Profile} />
+                <Redirect to="/" />
+            </Switch>
+        </UserContext.Provider>
+    );
 }
 
 export default App;

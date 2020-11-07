@@ -1,0 +1,24 @@
+.category-select {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    .select-label {
+        font-size: 0.8em;
+        //margin: 10px 0 0 42px;
+    }
+    .react-select-container {
+        border: 0px;
+        .react-select__control {
+            border: 1px solid #ccc;
+            box-sizing: content-box;
+            box-shadow: none;
+            outline: 0;
+        }
+        .react-select__control:hover {
+            border-color: #43b9a9 !important;
+        }
+        .react-select__control:focus {
+            border-color: #43b9a9 !important;
+        }
+    }
+}
