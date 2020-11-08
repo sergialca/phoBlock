@@ -24,6 +24,8 @@ const SignupForm = () => {
         mail: "",
         psw: "",
         repsw: "",
+        general: "",
+        color: "#4ED900",
     });
 
     const onChange = (e) => {
@@ -81,9 +83,16 @@ const SignupForm = () => {
             repswIsValid === "valid"
         ) {
             const res = await sendSignupData(field);
-            if (res) {
-                //congrats you signed up
+            if (res.ok) {
                 setLoading(() => false);
+                setError((prev) => ({ ...prev, color: "#4ED900", general: "Signed up correctly" }));
+            } else {
+                setLoading(() => false);
+                setError((prev) => ({
+                    ...prev,
+                    color: "#ff0000",
+                    general: res.message,
+                }));
             }
         }
         setLoading(() => false);
@@ -134,7 +143,6 @@ const SignupForm = () => {
                     name="psw"
                     label="Password"
                     placeholder="Password"
-                    type="password"
                     onChange={onChange}
                     error={error.psw}
                 />
@@ -142,7 +150,6 @@ const SignupForm = () => {
                     name="repsw"
                     label="Repeat Password"
                     placeholder="Repeat Password"
-                    type="password"
                     onChange={onChange}
                     error={error.repsw}
                 />
@@ -157,6 +164,7 @@ const SignupForm = () => {
                     call={onSign}
                 />
             </div>
+            <p style={{ color: error.color, textAlign: "center" }}>{error.general}</p>
         </div>
     );
 };

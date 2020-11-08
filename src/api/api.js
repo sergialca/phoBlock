@@ -1,4 +1,5 @@
 import axios from "axios";
+import Parse from "parse";
 //const url = "azure.server";
 
 const parseUrl = "https://parseapi.back4app.com";
@@ -9,20 +10,19 @@ const dHeaders = {
     "Content-Type": "application/json",
 };
 
-export const sendSignupData = async () => {
+export const sendSignupData = async ({ name, surname, wallet, mail, psw }) => {
     try {
-        const send = await axios({
-            url: `${parseUrl}`,
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers":
-                    "x-requested-with, authorization, content-type, cache-control, pragma, expires,  Content-Language",
-            },
-        });
-        return send;
+        const user = new Parse.User();
+        user.set("username", mail);
+        user.set("email", mail);
+        user.set("password", psw);
+        user.set("author", `${name} ${surname}`);
+        user.set("wallet", wallet);
+        const send = await user.signUp();
+        return { ok: "ok", send: send };
     } catch (error) {
         console.log("Error sending data to server when signed up");
-        return false;
+        return error;
     }
 };
 
@@ -40,7 +40,7 @@ export const sendLoginData = async (mail, psw) => {
         return send;
     } catch (error) {
         console.log("Error sending data to server when loggin in");
-        return false;
+        return error;
     }
 };
 
