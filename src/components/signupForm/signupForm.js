@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Input from "../../components/input/input";
+import PswInput from "../../components/pswInput/pswInput";
 import SubmitButton from "../submitButton/submitButton";
-import api from "../../api/api";
+import { mailValidation, textValidation, repswValidation } from "../../validations/validations";
+import Wvalidator from "wallet-address-validator";
+import { sendSignupData } from "../../api/api";
 import "./signupForm.scss";
 
 const SignupForm = () => {
@@ -28,32 +31,60 @@ const SignupForm = () => {
             ...field,
             [e.target.name]: e.target.value,
         });
+        setError({
+            ...error,
+            [e.target.name]: "",
+        });
     };
 
     const onSign = async () => {
         //name validation
         setLoading(() => true);
-
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = today.getFullYear();
-
-        today = yyyy + '-' + mm + '-' + dd;
-
-        var sendSignupData = {
-            "firstName": field.name,
-            "surname": field.surname,
-            "wallet": field.wallet,
-            "emailAddress": field.mail,
-            "userPassword": field.psw,
-            "dateCreated": today
-        }
-
-        const res = await api.sendSignupData(sendSignupData);
-        console.log(res);
-        if (res) {
-            //congrats tou signed up
+        const nameIsValid = textValidation(field.name);
+        nameIsValid
+            ? setError((error) => ({ ...error, name: "" }))
+            : setError((error) => ({ ...error, name: "Name is required" }));
+        //surname validation
+        const surnameIsValid = textValidation(field.surname);
+        surnameIsValid
+            ? setError((error) => ({ ...error, surname: "" }))
+            : setError((error) => ({ ...error, surname: "Surname is required" }));
+        //wallet validation
+        const walletIsValid = Wvalidator.validate(field.wallet, "ETH");
+        walletIsValid
+            ? setError((error) => ({ ...error, wallet: "" }))
+            : setError((error) => ({ ...error, wallet: "Invalid ethereum wallet" }));
+        //mail validation
+        const mailIsValid = mailValidation(field.mail);
+        if (mailIsValid === "invalid") {
+            setError((error) => ({ ...error, mail: "Invalid email" }));
+        } else if (mailIsValid === "required") {
+            setError((error) => ({ ...error, mail: "Email is required" }));
+        } else setError((error) => ({ ...error, mail: "" }));
+        //psw validation
+        const pswIsValid = textValidation(field.psw);
+        pswIsValid
+            ? setError((error) => ({ ...error, psw: "" }))
+            : setError((error) => ({ ...error, psw: "Password is required" }));
+        //repsw validation
+        const repswIsValid = repswValidation(field.psw, field.repsw);
+        if (repswIsValid === "required") {
+            setError((error) => ({ ...error, repsw: "Repeat password is required" }));
+        } else if (repswIsValid === "nomatch") {
+            setError((error) => ({ ...error, repsw: "Passwords don't match" }));
+        } else setError((error) => ({ ...error, repsw: "" }));
+        if (
+            nameIsValid &&
+            surnameIsValid &&
+            mailIsValid === "valid" &&
+            pswIsValid &&
+            repswIsValid === "valid"
+        ) {
+            const res = await sendSignupData(field);
+            if (res) {
+                //congrats you signed up
+                setLoading(() => false);
+            }
         }
         setLoading(() => false);
     };
@@ -99,8 +130,7 @@ const SignupForm = () => {
                     onChange={onChange}
                     error={error.mail}
                 />
-                <Input
-                    classe="input"
+                <PswInput
                     name="psw"
                     label="Password"
                     placeholder="Password"
@@ -108,8 +138,7 @@ const SignupForm = () => {
                     onChange={onChange}
                     error={error.psw}
                 />
-                <Input
-                    classe="input"
+                <PswInput
                     name="repsw"
                     label="Repeat Password"
                     placeholder="Repeat Password"

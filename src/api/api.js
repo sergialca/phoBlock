@@ -9,48 +9,39 @@ const dHeaders = {
     "Content-Type": "application/json",
 };
 
-async function sendSignupData(dataToSubmit) {
-    var retVal = false;
-
-    await axios
-        .post("/User", dataToSubmit)
-        .then((response) => {
-            console.log(response);
-            retVal = true;
-        })
-        .catch((error) => {
-            console.log(error);
-            retVal = false;
+export const sendSignupData = async () => {
+    try {
+        const send = await axios({
+            url: `${parseUrl}`,
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                    "x-requested-with, authorization, content-type, cache-control, pragma, expires,  Content-Language",
+            },
         });
+        return send;
+    } catch (error) {
+        console.log("Error sending data to server when signed up");
+        return false;
+    }
+};
 
-    return retVal;
-}
-
-async function sendLoginData(mail, psw) {
-    var dataToSubmit = {
-        emailAddress: mail,
-        password: psw,
-    };
-
-    var responseData = {};
-
-    await axios
-        .post("/AuthenticateLogin", dataToSubmit)
-        .then((response) => {
-            //console.log(response.data);
-
-            responseData = response.data;
-        })
-        .catch((error) => {
-            console.log(error);
+export const sendLoginData = async (mail, psw) => {
+    try {
+        const send = await axios({
+            method: "post",
+            url: `${parseUrl}`,
+            headers: { "Access-Control-Allow-Origin": "*" },
+            data: {
+                email: mail || "",
+                psw: psw || "",
+            },
         });
-
-    return responseData;
-}
-
-export default {
-    sendSignupData,
-    sendLoginData,
+        return send;
+    } catch (error) {
+        console.log("Error sending data to server when loggin in");
+        return false;
+    }
 };
 
 export const addImage = async (fields, author, hash, wallet) => {

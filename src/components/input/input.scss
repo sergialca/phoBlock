@@ -21,7 +21,8 @@
         margin: 0 auto;
     }
 
-    .input:focus {
+    .input:focus,
+    input:hover {
         border-color: #49beae;
     }
 
@@ -44,7 +45,6 @@
     .input-wrapper {
         width: auto;
         .input-label {
-            font-size: 0.8em;
             margin: 10px 0 0 0;
         }
         .input {

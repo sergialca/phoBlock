@@ -49,12 +49,13 @@ const UploadForm = ({ display, onClose }) => {
                 }));
                 addImage(fields, "Jorge Lucas", ipfsres.hash, "0xabc");
                 setLoading(() => false);
-            } else
+            } else {
                 setIpfsMsg(() => ({
                     msg: "An error occured when uploading to ipfs",
                     color: "#ff0000",
                 }));
-            setLoading(() => false);
+                setLoading(() => false);
+            }
         } else setIsFile(() => "Upload a file");
     };
 
