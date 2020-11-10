@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../../components/navbar/navbar";
 import Input from "../../components/input/input";
+import PswInput from "../../components/pswInput/pswInput";
 import SubmitButton from "../../components/submitButton/submitButton";
 import { mailValidation, textValidation } from "../../validations/validations";
 import { sendLoginData } from "../../api/api";
 import "./login.scss";
+import { UserContext } from "../../context/user";
 
-const Login = () => {
+const Login = ({ history }) => {
     const [log, setLog] = useState({ mail: "", psw: "" });
-    const [error, setError] = useState({ mail: "", psw: "" });
+    const [error, setError] = useState({ mail: "", psw: "", general: "", color: "#4ED900" });
     const [loading, setLoading] = useState(false);
+
+    const { user, setUser } = useContext(UserContext);
 
     const onChange = (e) => {
         setLog({
@@ -17,6 +21,8 @@ const Login = () => {
             [e.target.name]: e.target.value,
         });
     };
+
+    const { REACT_APP_ID } = process.env;
 
     const onLogin = async () => {
         setLoading(() => true);
@@ -31,11 +37,32 @@ const Login = () => {
             ? setError((error) => ({ ...error, psw: "" }))
             : setError((error) => ({ ...error, psw: "Password is required" }));
         if (mailIsValid === "valid" && pswIsValid) {
-            const res = await sendLoginData(log.mail, log.psw);
-            if (res) {
+            const res = await sendLoginData(log);
+            if (res.ok) {
+                const session = JSON.parse(
+                    localStorage.getItem(`Parse/${REACT_APP_ID}/currentUser`)
+                );
+                if (session) {
+                    session.sessionToken
+                        ? setUser(() => ({
+                              logged: true,
+                              author: session.author,
+                              mail: session.email,
+                              wallet: session.wallet,
+                              token: session.sessionToken,
+                          }))
+                        : setUser(() => ({
+                              logged: false,
+                          }));
+                } else return { logged: false };
                 //go to homepage
+
+                setLoading(() => false);
+                history.push(`/home`);
+            } else {
+                setLoading(() => false);
+                setError((prev) => ({ ...prev, color: "#ff0000", general: res.message }));
             }
-            setLoading(() => false);
         } else {
             setLoading(() => false);
         }
@@ -56,12 +83,10 @@ const Login = () => {
                         onChange={onChange}
                         error={error.mail}
                     />
-                    <Input
-                        classe="input"
+                    <PswInput
                         name="psw"
                         label="Password"
                         placeholder="Password"
-                        type="password"
                         onChange={onChange}
                         error={error.psw}
                     />
@@ -75,6 +100,7 @@ const Login = () => {
                             call={onLogin}
                         />
                     </div>
+                    <p style={{ color: error.color, textAlign: "center" }}>{error.general}</p>
                 </div>
             </div>
         </div>

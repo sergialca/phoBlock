@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import AppRoute from "./components/appRoute/appRoute";
 import Login from "./pages/login/login";
 import Signup from "./pages/signup/signup";
 import Profile from "./pages/profile/profile";
@@ -10,15 +11,17 @@ import Parse from "parse";
 import "./App.scss";
 
 function App() {
+    const { REACT_APP_ID, REACT_APP_KEY } = process.env;
+
     const getUserLoged = () => {
-        const storage = localStorage.getItem(`phouser`);
-        const session = JSON.parse(storage);
+        const session = JSON.parse(localStorage.getItem(`Parse/${REACT_APP_ID}/currentUser`));
         if (session) {
-            return session.token
+            return session.sessionToken
                 ? {
                       logged: true,
-                      name: session.name,
+                      author: session.author,
                       mail: session.email,
+                      wallet: session.wallet,
                       token: session.sessionToken,
                   }
                 : { logged: false };
@@ -26,8 +29,6 @@ function App() {
     };
 
     const [user, setUser] = useState(getUserLoged());
-
-    const { REACT_APP_ID, REACT_APP_KEY } = process.env;
 
     Parse.serverURL = "https://parseapi.back4app.com";
     Parse.initialize(REACT_APP_ID, REACT_APP_KEY);
@@ -37,9 +38,9 @@ function App() {
             <Switch>
                 <Route path="/login" component={Login} />
                 <Route path="/signup" component={Signup} />
-                <Route path="/" exact component={Home} />
                 <Route path="/about" component={About} />
-                <Route path="/profile" component={Profile} />
+                <AppRoute path="/profile" component={Profile} />
+                <Route path="/" exact component={Home} />
                 <Redirect to="/" />
             </Switch>
         </UserContext.Provider>

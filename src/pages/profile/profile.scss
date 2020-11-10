@@ -1,18 +1,60 @@
 .profile {
-    .upload-btn {
-        padding: 6px 12px;
-        cursor: pointer;
-        border-width: 0px;
-        border-style: none;
-        outline: none;
-        border-radius: 10px;
-        font-size: 1.1em;
-        background-color: #42b8a8;
+    .profile-header {
+        margin: 0 20px;
+        display: flex;
+        border-bottom: 1px solid #ccc;
+        flex-wrap: wrap;
+        .profile-data {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 20px;
+
+            .info {
+                margin: 2px 0;
+            }
+        }
+        .logout-wrap {
+            display: flex;
+            align-items: center;
+            .logout {
+                padding: 6px 12px;
+                cursor: pointer;
+                border-width: 0px;
+                border-style: none;
+                outline: none;
+                border-radius: 10px;
+                font-size: 1.1em;
+                background-color: #e54b4b;
+            }
+            .logout:hover {
+                background: linear-gradient(90deg, #e54b4b 0%, #e90e89 100%);
+            }
+            .logout:active {
+                background-color: #e90e89;
+            }
+        }
     }
-    .upload-btn:hover {
-        background: linear-gradient(90deg, #43b9a9 0%, #0074ff 100%);
-    }
-    .upload-btn:active {
-        background-color: #0074ff;
+    .profile-main {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+
+        .upload-btn {
+            padding: 6px 12px;
+            cursor: pointer;
+            border-width: 0px;
+            border-style: none;
+            outline: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            background-color: #42b8a8;
+        }
+        .upload-btn:hover {
+            background: linear-gradient(90deg, #43b9a9 0%, #0074ff 100%);
+        }
+        .upload-btn:active {
+            background-color: #0074ff;
+        }
     }
 }

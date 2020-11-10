@@ -24,10 +24,10 @@ const Navbar = () => {
             </Link>
             {user.logged ? (
                 <ul className={toggle ? "links show-nav" : "links"}>
-                    <Link className="ali" to="/about">
+                    <Link className="ali dist" to="/about">
                         About
                     </Link>
-                    <Link className="ali dist" to="/profile">
+                    <Link className="ali" to="/profile">
                         Profile
                     </Link>
                 </ul>

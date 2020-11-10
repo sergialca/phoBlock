@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import Navbar from "../../components/navbar/navbar";
 import UploadForm from "../../components/uploadForm/uploadForm";
+import { logout } from "../../api/api";
 import { UserContext } from "../../context/user";
+import Identicon from "react-identicons";
 import "./profile.scss";
 
 const Profile = () => {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [display, setDisplay] = useState({ uploadForm: false });
 
     const showModal = () => {
@@ -24,9 +26,41 @@ const Profile = () => {
         <div className="profile">
             <UploadForm display={display.uploadForm} onClose={closeModal} />
             <Navbar />
-            <button className="upload-btn" onClick={() => showModal()}>
-                Upload Images
-            </button>
+            <div className="profile-header">
+                <div className="profile-img">
+                    <Identicon string={user.author} size={100} />
+                </div>
+                <div className="profile-data">
+                    <p className="info">
+                        <strong>Name: </strong>
+                        {user.author}
+                    </p>
+                    <p className="info">
+                        <strong>Email: </strong>
+                        {user.mail}
+                    </p>
+                    <p className="info">
+                        <strong>Wallet: </strong>
+                        {user.wallet}
+                    </p>
+                </div>
+                <div className="logout-wrap">
+                    <button
+                        className="logout"
+                        onClick={() => {
+                            logout();
+                            setUser(() => ({ logged: false }));
+                        }}
+                    >
+                        Log out
+                    </button>
+                </div>
+            </div>
+            <div className="profile-main">
+                <button className="upload-btn" onClick={() => showModal()}>
+                    Upload Images
+                </button>
+            </div>
         </div>
     );
 };
