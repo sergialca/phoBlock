@@ -1,0 +1,17 @@
+.author-image-wrapper {
+    width: 90%;
+    .author-image {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (min-width: 768px) {
+    .author-image-wrapper {
+        width: 40%;
+        .author-image {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

@@ -35,26 +35,26 @@
             }
         }
     }
+    .upload-btn {
+        padding: 6px 12px;
+        cursor: pointer;
+        border-width: 0px;
+        border-style: none;
+        outline: none;
+        border-radius: 10px;
+        font-size: 1.1em;
+        background-color: #42b8a8;
+    }
+    .upload-btn:hover {
+        background: linear-gradient(90deg, #43b9a9 0%, #0074ff 100%);
+    }
+    .upload-btn:active {
+        background-color: #0074ff;
+    }
     .profile-main {
         padding: 20px;
         display: flex;
-        justify-content: center;
-
-        .upload-btn {
-            padding: 6px 12px;
-            cursor: pointer;
-            border-width: 0px;
-            border-style: none;
-            outline: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            background-color: #42b8a8;
-        }
-        .upload-btn:hover {
-            background: linear-gradient(90deg, #43b9a9 0%, #0074ff 100%);
-        }
-        .upload-btn:active {
-            background-color: #0074ff;
-        }
+        justify-content: space-evenly;
+        flex-wrap: wrap;
     }
 }
