@@ -78,7 +78,7 @@ const Profile = () => {
             <div className="profile-main">
                 {url
                     ? url.map((c) => {
-                          return <AuthorImage link={c.hash} />;
+                          return <AuthorImage key={c.id} link={c.hash} />;
                       })
                     : ""}
             </div>

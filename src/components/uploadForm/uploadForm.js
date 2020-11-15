@@ -1,14 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ImCross } from "react-icons/im";
 import CategorySelect from "../categorySelect/categorySelect";
 import SubmitButton from "../submitButton/submitButton";
 import { addImage } from "../../api/api";
-import "./uploadForm.scss";
 import { UserContext } from "../../context/user";
+import IpfsApi from "ipfs-http-client";
+import "./uploadForm.scss";
 
 const UploadForm = ({ display, onClose }) => {
     const [selectedFile, setSelectedFile] = useState(null);
-    const [fields, setFields] = useState({ select: "" });
+    const [fields, setFields] = useState({ select: [""] });
     const [loading, setLoading] = useState(false);
     const [isFile, setIsFile] = useState("");
     const [ipfsMsg, setIpfsMsg] = useState({
@@ -16,8 +17,8 @@ const UploadForm = ({ display, onClose }) => {
         color: "#4ED900",
     });
     const { user } = useContext(UserContext);
-    const IpfsHttpClient = require("ipfs-http-client");
-    const ipfs = IpfsHttpClient({
+
+    const ipfs = IpfsApi({
         host: "ipfs.infura.io",
         port: "5001",
         protocol: "https",

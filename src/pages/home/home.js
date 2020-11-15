@@ -3,14 +3,20 @@ import Navbar from "../../components/navbar/navbar";
 import Header from "../../components/header/header";
 import DownloadImage from "../../components/downloadImage/downloadImage";
 import { getImages } from "../../api/api";
+//import toBuffer from "it-to-buffer";
+import IpfsApi from "ipfs-http-client";
 import "./home.scss";
 
 const Home = () => {
     const [url, setUrl] = useState("");
+    const ipfs = IpfsApi({
+        host: "ipfs.infura.io",
+        port: "5001",
+        protocol: "https",
+    });
 
     const getHomeImages = async () => {
         const img = await getImages();
-        console.log("Home -> img", img.send);
         if (img.ok) {
             for (let i = 0; i < img.send.length; i++) {
                 setUrl((prev) => [
@@ -26,9 +32,18 @@ const Home = () => {
             }
         }
     };
+
     useEffect(() => {
         getHomeImages();
     }, []);
+
+    const onDownload = async (hash) => {
+        console.log("the img hash is -> ", hash);
+        const saveit = await ipfs.get(hash);
+        const cat = await ipfs.cat(hash);
+        console.log("Home -> cat", cat);
+        console.log("Home -> save", saveit);
+    };
 
     return (
         <div>
@@ -41,9 +56,9 @@ const Home = () => {
                               <DownloadImage
                                   key={c.id}
                                   url={c.hash}
-                                  orientation={c.orientation}
                                   author={c.author}
                                   wallet={c.wallet}
+                                  onDownload={onDownload}
                               />
                           );
                       })
