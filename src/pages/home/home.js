@@ -3,7 +3,7 @@ import Navbar from "../../components/navbar/navbar";
 import Header from "../../components/header/header";
 import DownloadImage from "../../components/downloadImage/downloadImage";
 import { getImages } from "../../api/api";
-//import toBuffer from "it-to-buffer";
+import toBuffer from "it-to-buffer";
 import IpfsApi from "ipfs-http-client";
 import "./home.scss";
 
@@ -27,6 +27,7 @@ const Home = () => {
                         wallet: img.send[i].attributes.wallet,
                         author: img.send[i].attributes.author,
                         orientation: img.send[i].attributes.orientation,
+                        cid: img.send[i].attributes.cid,
                     },
                 ]);
             }
@@ -37,12 +38,11 @@ const Home = () => {
         getHomeImages();
     }, []);
 
-    const onDownload = async (hash) => {
+    const onDownload = async (hash, cid) => {
+        console.log("Home -> cid", cid);
         console.log("the img hash is -> ", hash);
-        const saveit = await ipfs.get(hash);
-        const cat = await ipfs.cat(hash);
-        console.log("Home -> cat", cat);
-        console.log("Home -> save", saveit);
+        //const ct = await toBuffer(ipfs.get(hash));
+        //console.log("Home -> ct", ct);
     };
 
     return (
@@ -58,6 +58,7 @@ const Home = () => {
                                   url={c.hash}
                                   author={c.author}
                                   wallet={c.wallet}
+                                  cid={c.cid}
                                   onDownload={onDownload}
                               />
                           );

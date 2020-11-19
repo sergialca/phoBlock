@@ -26,7 +26,7 @@ export const sendLoginData = async ({ mail, psw }) => {
     }
 };
 
-export const addImage = async (categories, author, hash, wallet) => {
+export const addImage = async (categories, author, hash, wallet, cid) => {
     try {
         const Image = Parse.Object.extend("Image");
         const newImage = new Image();
@@ -34,7 +34,7 @@ export const addImage = async (categories, author, hash, wallet) => {
         newImage.set("author", author);
         newImage.set("wallet", wallet);
         newImage.set("categories", categories);
-        //newImage.set("orientation", "horizontal");
+        newImage.set("cid", cid);
         const send = await newImage.save();
         return { ok: "ok", send: send };
     } catch (e) {
