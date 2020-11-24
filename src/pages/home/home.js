@@ -5,6 +5,7 @@ import DownloadImage from "../../components/downloadImage/downloadImage";
 import { getImages } from "../../api/api";
 import toBuffer from "it-to-buffer";
 import IpfsApi from "ipfs-http-client";
+import Web3 from "web3";
 import "./home.scss";
 
 const Home = () => {
@@ -14,6 +15,13 @@ const Home = () => {
         port: "5001",
         protocol: "https",
     });
+    const smartContractAdress = "0x00";
+    const web3 = new Web3("https://goerli.infura.io/v3/2f9903cb5e0c4b20884015df6a4295ef");
+    const web3Infura = new Web3(
+        Web3.givenProvider || "https://goerli.infura.io/v3/2f9903cb5e0c4b20884015df6a4295ef"
+    );
+
+    const phoContract = new web3.eth.Contract("abi", smartContractAdress);
 
     const getHomeImages = async () => {
         const img = await getImages();
