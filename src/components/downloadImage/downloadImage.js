@@ -8,7 +8,10 @@ const DownloadImage = ({ url, wallet, author, cid, onDownload }) => {
         <div className="download-img-wrapper">
             <img src={ipfsUrl} alt="homepage" className="img-home" />
             <div className="btn-wrapper">
-                <button className="btn-download" onClick={() => onDownload(data.hash, data.cid)}>
+                <button
+                    className="btn-download"
+                    onClick={() => onDownload(data.hash, data.cid, data.wallet)}
+                >
                     Download
                 </button>
             </div>
